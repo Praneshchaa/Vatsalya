@@ -797,7 +797,7 @@ function SiteFooter() {
       maxWidth: 300
     }
   }, /*#__PURE__*/React.createElement("img", {
-    src: "../../assets/logo-horizontal-reverse.svg",
+    src: "assets/logo-horizontal-reverse.svg",
     alt: "Vatsalya Sewa Griha",
     height: "44"
   }), /*#__PURE__*/React.createElement("p", {
@@ -917,7 +917,7 @@ function SiteHeader({
       display: 'flex'
     }
   }, /*#__PURE__*/React.createElement("img", {
-    src: "../../assets/logo-horizontal.svg",
+    src: "assets/logo-horizontal.svg",
     alt: "Vatsalya Sewa Griha",
     height: "44"
   })), /*#__PURE__*/React.createElement("nav", {
