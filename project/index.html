@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vatsalya Sewa Griha · Where care meets joy</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&display=swap" />
+
+<!-- Vatsalya Sewa Griha design system tokens + styles -->
+<link rel="stylesheet" href="_ds/vatsalya-sewa-griha-design-system-1b6a1024-b4fc-456d-8e3f-d0bf4b99e736/tokens/fonts.css" />
+<link rel="stylesheet" href="_ds/vatsalya-sewa-griha-design-system-1b6a1024-b4fc-456d-8e3f-d0bf4b99e736/tokens/colors.css" />
+<link rel="stylesheet" href="_ds/vatsalya-sewa-griha-design-system-1b6a1024-b4fc-456d-8e3f-d0bf4b99e736/tokens/typography.css" />
+<link rel="stylesheet" href="_ds/vatsalya-sewa-griha-design-system-1b6a1024-b4fc-456d-8e3f-d0bf4b99e736/tokens/spacing.css" />
+<link rel="stylesheet" href="_ds/vatsalya-sewa-griha-design-system-1b6a1024-b4fc-456d-8e3f-d0bf4b99e736/tokens/base.css" />
+<link rel="stylesheet" href="_ds/vatsalya-sewa-griha-design-system-1b6a1024-b4fc-456d-8e3f-d0bf4b99e736/styles.css" />
+
+<!-- Shared site styles + components for the sections below the hero -->
+<link rel="stylesheet" href="site.css" />
+<script src="image-slot.js"></script>
+
+<link rel="preload" as="image" href="images/hand-elder-clean.png" />
+<link rel="preload" as="image" href="images/hand-young-clean.png" />
+
+<style>
+  :root {
+    --ease-cine: cubic-bezier(0.45, 0.05, 0.2, 1);   /* slow-in, gentle settle */
+    --ease-soft: cubic-bezier(0.32, 0.72, 0, 1);
+    --hero-eyebrow: #a87f17;
+    --hero-heading: var(--color-primary-700);
+    --hero-accent:  var(--color-secondary-500);
+    --hero-sub:     #46553f;
+    --hero-ink:     #294031;
+
+    /* Hand placement — derived from measured fingertip fractions so the two
+       fingertips always converge at (50vw, --meet-y) at any size. Hands are
+       sized large enough that the sleeves bleed off both screen edges. */
+    --hw: clamp(840px, 86vw, 1500px);   /* display width of each hand image */
+    --meet-y: 70vh;
+    --gap: 6px;                          /* tiny gap at the touch point for the glow */
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f3e6c8; }
+  body {
+    font-family: var(--font-sans, 'Poppins', system-ui, sans-serif);
+    color: var(--hero-ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ===================== SCROLL SHELL ===================== */
+  .hero-scroll { position: relative; height: 100vh; height: 100svh; background: #faf3e1; }
+  .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; isolation: isolate; }
+
+  /* ===================== BACKGROUND ===================== */
+  .bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(78% 80% at 84% 16%, rgba(243, 196, 112, 0.55) 0%, rgba(243, 196, 112, 0) 56%),
+      radial-gradient(120% 120% at 50% 32%, #f7ecd2 0%, #f1e4c5 46%, #e9dcbd 100%);
+  }
+  /* soft garden bokeh, upper-right */
+  .bg::after {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 88% 24%, rgba(255,238,196,0.85) 0 1.1%, transparent 1.6%),
+      radial-gradient(circle at 79% 13%, rgba(255,236,188,0.6) 0 0.8%, transparent 1.3%),
+      radial-gradient(circle at 93% 40%, rgba(255,242,206,0.55) 0 1.4%, transparent 2%),
+      radial-gradient(circle at 72% 30%, rgba(255,230,170,0.4) 0 0.6%, transparent 1.1%),
+      radial-gradient(circle at 84% 52%, rgba(255,238,196,0.4) 0 1%, transparent 1.6%);
+    filter: blur(1px);
+  }
+  /* Soft edge fade — left & right — so the sleeves dissolve into the page
+     instead of ending in a hard vertical cut. */
+  .edge-fade { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+  .edge-fade::before, .edge-fade::after { content: ''; position: absolute; top: 0; bottom: 0; width: clamp(60px, 8vw, 140px); }
+  .edge-fade::before { left: 0;  background: linear-gradient(90deg,  #f1e4c5 0%, rgba(241,228,197,0) 100%); }
+  .edge-fade::after  { right: 0; background: linear-gradient(270deg, #e9dcbd 0%, rgba(233,220,189,0) 100%); }
+
+  /* ===================== FADE WRAP (hands + glow + text) ===================== */
+  .fadewrap { position: absolute; inset: 0; z-index: 2; will-change: transform, opacity, filter; }
+
+  /* ===================== HANDS ===================== */
+  .hand { position: absolute; width: var(--hw); height: auto; display: block; user-select: none; -webkit-user-drag: none; }
+  .hand img { width: 100%; height: auto; display: block; }
+
+  .hand.elder {
+    left: calc(50vw - 0.79805 * var(--hw) - var(--gap));
+    top:  calc(var(--meet-y) - 0.23241 * var(--hw));
+  }
+  .hand.young {
+    left: calc(50vw - 0.18203 * var(--hw) + var(--gap));
+    top:  calc(var(--meet-y) - 0.30986 * var(--hw));
+  }
+
+  /* ===================== CONTACT GLOW ===================== */
+  .glow {
+    position: absolute; left: 50vw; top: var(--meet-y); z-index: 3;
+    width: clamp(220px, 26vw, 360px); aspect-ratio: 1;
+    transform: translate(-50%, -50%) scale(1);
+    background: radial-gradient(circle,
+      rgba(255, 244, 214, 0.85) 0%,
+      rgba(248, 206, 130, 0.45) 26%,
+      rgba(240, 188, 104, 0.16) 50%,
+      rgba(240, 188, 104, 0) 68%);
+    mix-blend-mode: screen; pointer-events: none; filter: blur(3px);
+  }
+  .glow::before {
+    content: ''; position: absolute; left: 50%; top: 50%;
+    width: 22%; height: 22%; transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255,250,236,0.95) 0%, rgba(255,244,214,0) 70%);
+    border-radius: 50%;
+  }
+
+  /* ===================== HEADER ===================== */
+  .site-header {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    padding: clamp(20px, 3vw, 34px) clamp(22px, 5vw, 72px);
+  }
+  .brand img { height: clamp(40px, 4.4vw, 52px); width: auto; display: block; }
+  .site-nav { display: flex; align-items: center; gap: clamp(20px, 3vw, 44px); }
+  .site-nav a {
+    position: relative; font-weight: 500; font-size: 16px; color: var(--hero-ink);
+    text-decoration: none; padding: 4px 0; transition: color 160ms var(--ease-soft);
+  }
+  .site-nav a:hover { color: var(--color-primary-600); }
+  .site-nav a.active { color: var(--color-primary-600); }
+  .site-nav a.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: var(--color-primary-500); border-radius: 2px; }
+  .cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 500; font-size: 15.5px; line-height: 1; color: var(--color-secondary-900);
+    background: var(--color-secondary-500); padding: 13px 26px; border-radius: var(--radius-pill, 999px);
+    text-decoration: none; border: 0; cursor: pointer;
+    box-shadow: 0 8px 22px rgba(232, 160, 32, 0.34), 0 2px 5px rgba(160, 107, 10, 0.18);
+    transition: background 160ms var(--ease-soft), transform 160ms var(--ease-soft);
+  }
+  .cta:hover { background: var(--color-secondary-400); }
+  .cta:active { transform: scale(0.97); }
+  .nav-toggle { display: none; }
+
+  /* ===================== TEXT ===================== */
+  .hero-text {
+    position: absolute; left: 0; right: 0; top: clamp(112px, 18vh, 190px); z-index: 10;
+    text-align: center; padding: 0 clamp(24px, 6vw, 40px); pointer-events: none;
+  }
+  .eyebrow {
+    font-weight: 500; font-size: clamp(12px, 1.4vw, 15px); letter-spacing: 0.34em;
+    text-transform: uppercase; color: var(--hero-eyebrow); margin: 0 0 clamp(12px, 2vh, 18px); padding-left: 0.34em;
+  }
+  .hero-title {
+    font-family: 'Lora', Georgia, serif; font-weight: 500;
+    font-size: clamp(40px, 7vw, 92px); line-height: 1.04; letter-spacing: -0.018em;
+    color: var(--hero-heading); margin: 0; text-wrap: balance;
+    text-shadow: 0 2px 26px rgba(247, 236, 210, 0.6);
+  }
+  .hero-title .accent { color: var(--hero-accent); }
+  .hero-sub {
+    font-weight: 400; font-size: clamp(15px, 1.7vw, 19px); line-height: 1.7;
+    color: var(--hero-sub); margin: clamp(16px, 2.6vh, 24px) auto 0; max-width: 540px;
+    text-wrap: pretty; text-shadow: 0 1px 14px rgba(247, 236, 210, 0.7);
+  }
+
+  /* ===================== WAVES + LEAVES ===================== */
+  .waves { position: absolute; left: 0; right: 0; bottom: -1px; z-index: 6; width: 100%;
+    height: clamp(110px, 17vh, 210px); display: block; pointer-events: none; }
+  .leaves { display: none; }
+
+  /* ===================== ENTRANCE MOTION ===================== */
+  /* Base = final/visible state (reduced-motion & no-JS safe). */
+  @media (prefers-reduced-motion: no-preference) {
+    .hand.elder { animation: handFromLeft 2700ms var(--ease-cine) both; }
+    .hand.young { animation: handFromRight 2700ms var(--ease-cine) both; }
+    .glow { opacity: 0; animation: glowIn 1500ms ease 2150ms forwards, glowBreath 7s ease-in-out 3650ms infinite; }
+    .reveal { opacity: 0; transform: translateY(20px); animation: textRise 1300ms var(--ease-soft) forwards; }
+    .r-1 { animation-delay: 2550ms; }
+    .r-2 { animation-delay: 2750ms; }
+    .r-3 { animation-delay: 3050ms; }
+  }
+  @keyframes handFromLeft {
+    0%   { opacity: 0; transform: translateX(-8vw); }
+    35%  { opacity: 1; }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes handFromRight {
+    0%   { opacity: 0; transform: translateX(8vw); }
+    35%  { opacity: 1; }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes glowIn { from { opacity: 0; transform: translate(-50%,-50%) scale(0.4); } to { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
+  @keyframes glowBreath { 0%,100% { opacity: 0.82; } 50% { opacity: 1; } }
+  @keyframes textRise { to { opacity: 1; transform: translateY(0); } }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width: 760px) {
+    .site-nav, .cta { display: none; }
+    .nav-toggle { display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: 12px; border: 0; cursor: pointer;
+      background: rgba(255,255,255,0.5); color: var(--hero-ink); backdrop-filter: blur(6px); }
+    :root { --hw: clamp(680px, 168vw, 1100px); --meet-y: 72vh; }
+    .hero-title { font-size: clamp(36px, 11vw, 60px); }
+  }
+</style>
+</head>
+<body>
+  <div class="hero-scroll">
+    <main class="stage" data-screen-label="Home hero">
+      <div class="bg"></div>
+
+      <div class="fadewrap" id="fadewrap">
+        <!-- Hands: elder reaches from the left, younger from the right; fingertips meet at centre -->
+        <div class="hand elder"><img src="images/hand-elder-clean.png" alt="An elder's hand reaching out" /></div>
+        <div class="hand young"><img src="images/hand-young-clean.png" alt="A younger hand reaching back" /></div>
+
+        <!-- Warm glow at the point of contact -->
+        <div class="glow"></div>
+
+        <!-- Overlay text -->
+        <div class="hero-text">
+          <p class="eyebrow reveal r-1">Where care meets joy</p>
+          <h1 class="hero-title reveal r-2">Vatsalya Sewa Griha</h1>
+          <p class="hero-sub reveal r-3">Daytime care for older people in Kumaripati, Lalitpur.</p>
+        </div>
+      </div>
+
+      <!-- Soft side fades so the sleeves dissolve into the page -->
+      <div class="edge-fade"></div>
+
+      <!-- Header -->
+      <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Vatsalya Sewa Griha — home">
+          <img src="assets/logo-horizontal.png" alt="Vatsalya Sewa Griha" />
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="index.html" class="active" aria-current="page">Home</a>
+          <a href="about.html">About us</a>
+          <a href="contact.html">Contact us</a>
+        </nav>
+        <a class="cta" href="https://maps.app.goo.gl/yvxqwuGfga2em9hU7" target="_blank" rel="noopener" title="Opens Google Maps in a new tab">Visit us ↗</a>
+        <button class="nav-toggle" aria-label="Open menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+        </button>
+      </header>
+
+      <!-- Organic cream waves — bottom fill matches the section below so the curve melts into it -->
+      <svg class="waves" viewBox="0 0 1440 210" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,140 C240,96 470,196 760,166 C1030,138 1230,92 1440,134 L1440,210 L0,210 Z" fill="#e9efdd" opacity="0.6" />
+        <path d="M0,170 C260,124 470,210 760,186 C1040,164 1230,116 1440,160 L1440,210 L0,210 Z" fill="#faf3e1" />
+      </svg>
+
+      <!-- Leaves, lower-left -->
+      <svg class="leaves" viewBox="0 0 230 200" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 200 C2 150 6 86 70 40 C92 96 86 158 44 200 Z" fill="var(--color-primary-500)" opacity="0.92" />
+        <path d="M70 40 C70 96 58 150 40 196" stroke="#1f5a29" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+        <path d="M96 200 C72 162 78 110 132 78 C150 124 144 174 110 200 Z" fill="var(--color-primary-400)" opacity="0.9" />
+        <path d="M132 78 C128 124 116 166 104 196" stroke="#1f5a29" stroke-width="1.8" stroke-linecap="round" opacity="0.45" />
+        <path d="M150 200 C136 172 142 134 184 116 C196 150 190 184 168 200 Z" fill="var(--color-primary-300)" opacity="0.85" />
+      </svg>
+    </main>
+  </div>
+
+  <!-- ============================================================
+       CONTENT BELOW THE HERO (the hero above is intentionally untouched)
+       ============================================================ -->
+  <div class="vsg">
+
+    <header class="page-header page-header--reveal">
+      <a class="brand" href="index.html" aria-label="Vatsalya Sewa Griha — home"><img src="assets/logo-horizontal.png" alt="Vatsalya Sewa Griha" /></a>
+      <nav class="page-nav" aria-label="Primary">
+        <a href="index.html" class="active" aria-current="page">Home</a>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact us</a>
+      </nav>
+      <a class="btn btn-gold btn-sm header-cta" href="https://maps.app.goo.gl/yvxqwuGfga2em9hU7" target="_blank" rel="noopener" title="Opens Google Maps in a new tab">Visit us ↗</a>
+      <button class="nav-toggle" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </header>
+
+    <!-- WHO WE ARE -->
+    <section class="note-home" data-screen-label="Who we are" data-divider="var(--cream-2)" data-divider-accent="#e3ecd6" data-leaves>
+      <div class="note-text r from-left">
+        <h2 class="note-head">While you are at work, they are never on their own. They have friends, warm food, and someone close by.</h2>
+        <p class="note-body">Vatsalya is a house in Kumaripati, Lalitpur, not a ward, not a waiting room. People come in the morning, have their tea and the paper, and spend the day around others instead of alone in front of the TV.</p>
+        <p class="note-sign">With care, <b>the Vatsalya family</b></p>
+        <div class="note-marks">
+          <div class="nm">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M12 17.2s-2.6-1.6-2.6-3.4a1.6 1.6 0 0 1 2.6-1.2 1.6 1.6 0 0 1 2.6 1.2c0 1.8-2.6 3.4-2.6 3.4Z"/></svg></span>
+            <span class="lbl">A real home</span>
+          </div>
+          <div class="nm">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.1"/><circle cx="17" cy="9" r="2.5"/><path d="M3.5 19c.6-3.1 2.9-4.9 5.5-4.9s4.9 1.8 5.5 4.9"/><path d="M15.6 19c.3-1.9 1.4-3.3 3-3.6"/></svg></span>
+            <span class="lbl">Family, not staff</span>
+          </div>
+          <div class="nm">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9.5s-1.7-1.7-3.1-1.1a1.7 1.7 0 0 0-.5 2.7l3.6 3.5 3.6-3.5a1.7 1.7 0 0 0-.5-2.7C13.7 7.8 12 9.5 12 9.5Z"/><path d="M4 13v3a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4v-3"/><path d="M4 13a2 2 0 0 1 2-2M20 13a2 2 0 0 0-2-2"/></svg></span>
+            <span class="lbl">Never alone</span>
+          </div>
+        </div>
+      </div>
+      <div class="note-photo r from-right">
+        <img src="images/note-photo.jpg" alt="A caregiver in a purple Vatsalya Sewa Griha uniform resting a hand on an elder woman's shoulder by a sunlit window" />
+      </div>
+    </section>
+
+    <!-- A DAY HERE -->
+    <section class="day" data-screen-label="A day here" data-divider="var(--cream-0)" data-divider-accent="#e3ecd6" data-leaves>
+      <div class="wrap">
+        <div class="day-main">
+          <div class="head r">
+            <h2>What the days<br />actually feel like</h2>
+          </div>
+          <div class="day-stack" data-stagger="150">
+            <div class="moment r from-left">
+              <p class="time">Morning</p>
+              <p class="np">बिहानको चिया</p>
+              <p>The day starts together. Hot tea, the morning news, and friends to share it with before anything else.</p>
+            </div>
+            <div class="moment r from-left d1">
+              <p class="time">Midday</p>
+              <p class="np">दालभात, सँगै</p>
+              <p>Fresh, home-cooked Nepali food at a shared table. The kind of meal that tastes like someone made it just for you.</p>
+            </div>
+            <div class="moment r from-left d2">
+              <p class="time">Afternoon</p>
+              <p class="np">गीत र हाँसो</p>
+              <p>Gentle movement and a lot of laughter. Afternoons here are active and social, never long and empty.</p>
+            </div>
+            <div class="moment r from-left d3">
+              <p class="time">Through the night</p>
+              <p class="np">सुरक्षित रात</p>
+              <p>Health checks, gentle care and someone close by, all night. Safe in the dark hours too, so you can rest as well.</p>
+            </div>
+          </div>
+        </div>
+        <div class="aside r scale-in d1">
+          <div class="day-photos">
+            <img class="ph-main" src="images/day-building.jpg" alt="The Vatsalya Sewa Griha home in Kumaripati, Lalitpur" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY FAMILIES TRUST US -->
+    <section class="trust" data-screen-label="Why families trust us" data-divider="#1d3823" data-divider-accent="#2d7a3a" data-leaves>
+      <div class="wrap">
+        <div class="r from-left art">
+          <img src="images/trust-garden.png" data-parallax="40" alt="Elders chatting over tea in the garden outside the Vatsalya Sewa Griha home in Kumaripati, Lalitpur" />
+        </div>
+        <div class="r from-right d1">
+          <h2 class="h-sec serif">Handing your parents' care<br />to someone else isn't easy.</h2>
+          <ol data-stagger="140">
+            <li class="r rise-lg"><span class="num">01</span><div><h3>Trained, but patient first</h3><p>The staff are trained nurses and helpers. More than that, they're the kind of people who'll sit and listen, not just hand out pills and tick a box.</p></div></li>
+            <li class="r rise-lg d1"><span class="num">02</span><div><h3>We work around the person</h3><p>What time they wake, what they'll actually eat, which medicines, what they flat-out refuse to do. We figure that out and fit around it.</p></div></li>
+            <li class="r rise-lg d2"><span class="num">03</span><div><h3>Call or drop in whenever</h3><p>No visiting hours, no booking a slot. Phone us, or just turn up. We'll tell you how the day actually went.</p></div></li>
+            <li class="r rise-lg d3"><span class="num">04</span><div><h3>We'll tell you straight</h3><p>If your parent had a rough day or there's a health worry, we call. We won't dress it up or wait for you to ask.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR VALUES (dark, immersive) -->
+    <section class="values-big" data-screen-label="Our values" data-divider="var(--cream-1)" data-divider-accent="rgba(255,255,255,0.10)" data-leaves data-leaves-dark>
+      <svg class="leaf-water" width="320" height="320" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+      <div class="wrap">
+        <p class="intro r d1">We don't have a long mission statement. These four come closest to how we actually try to work. Tap one to see what we mean.</p>
+        <div class="vwords" id="vwords" data-stagger="130">
+          <span class="vword on r from-left" data-desc="We try to treat people the way we'd want our own parents treated. Mostly that means patience; old age is slow, and that's alright.">Compassion<span class="np">करुणा</span></span>
+          <span class="vword r from-left d1" data-desc="We ask people what they want, then listen. They've run households and raised families, and nobody here gets talked down to.">Respect<span class="np">सम्मान</span></span>
+          <span class="vword r from-left d2" data-desc="Help with a bath or the toilet happens quietly, no fuss. Needing a hand with that is normal, and we treat it that way.">Dignity<span class="np">मर्यादा</span></span>
+          <span class="vword r from-left d3" data-desc="People make friends here. They argue about politics, share tiffin, remember each other's names. It isn't a room full of strangers.">Community<span class="np">समुदाय</span></span>
+        </div>
+        <p class="vdesc" id="vdesc">We try to treat people the way we'd want our own parents treated. Mostly that means patience; old age is slow, and that's alright.</p>
+      </div>
+    </section>
+
+    <!-- IN FAMILIES' WORDS -->
+    <section class="voices" data-screen-label="In families' words" data-divider="var(--color-primary-600)" data-divider-accent="#1f5a29" data-leaves>
+      <div class="wrap">
+        <div class="head r">
+          <h2>What families<br />actually tell us</h2>
+        </div>
+        <div class="voices-grid">
+          <figure class="big r scale-in">
+            <span class="mark">“</span>
+            <div class="stars"><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg></div>
+            <blockquote>My father didn't want to come at first, said he didn't need babysitting. Now he's annoyed with us if we're running late to drop him off. He's made a couple of friends there.</blockquote>
+            <figcaption><span class="ava">A</span><span><span class="who">Anjali S.</span><br><span class="role">His daughter</span></span></figcaption>
+          </figure>
+          <div class="col">
+            <figure class="small r from-right d1">
+              <div class="stars"><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg></div>
+              <blockquote>I work full days and couldn't keep ringing to check on my dad. Now I'm not worried the whole time. That counts for a lot.</blockquote>
+              <figcaption><span class="ava">K</span><span><span class="who">Mr. Karki</span><br><span class="role">His son</span></span></figcaption>
+            </figure>
+            <figure class="small r from-right d2">
+              <div class="stars"><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg></div>
+              <blockquote>My mother eats better there than she does at home, honestly. And she comes back with some story every day.</blockquote>
+              <figcaption><span class="ava">S</span><span><span class="who">Saraswati D.</span><br><span class="role">Her daughter</span></span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MORE ABOUT US -->
+    <section class="band-green" data-screen-label="More about us">
+      <svg class="leaf-watermark" width="280" height="280" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+      <div class="inner">
+        <h2 class="h-sec serif">Come and see it for yourself</h2>
+        <p class="lead" style="color:var(--color-primary-100)">Easiest thing is to just come by during the day, see the place, meet the staff, watch how it runs. Or call and ask us anything.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:30px">
+          <a class="btn btn-gold btn-lg" href="about.html">More about us<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" data-screen-label="Footer">
+      <div class="wrap">
+        <div class="footer-news">
+          <div class="news-col">
+            <img class="f-logo" src="assets/logo-white.png" alt="Vatsalya Sewa Griha" />
+            <p class="footer-tagline serif">Where care meets joy.</p>
+            <div class="social">
+              <a href="https://www.instagram.com/vatsalyasewagriha?fbclid=IwY2xjawSqe3lleHRuA2FlbQIxMABicmlkETE1dFV5MTZZTkl1dFNsaXI1c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHts57KjZY5-h9u0hmSbF7dKou9AbJLcypgoSsovpn0WjTbmc83xdo4Cd0IW1_aem_n5UZMaQb4pbQEvBM_iNXSg" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+              <a href="https://www.facebook.com/profile.php?id=61582851994439" target="_blank" rel="noopener" aria-label="Facebook"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            </div>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About us</a></li>
+              <li><a href="contact.html">Contact us</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Reach us</h4>
+            <ul>
+              <li><a href="tel:+97715410604">01-5410604</a>, <a href="tel:+9779849238791">9849238791</a>, <a href="tel:+9779849211955">9849211955</a></li>
+              <li><a href="mailto:vatsalyasewagriha@gmail.com">vatsalyasewagriha@gmail.com</a></li>
+              <li><a href="contact.html">Kumaripati, Lalitpur</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© <span id="year">2026</span> Vatsalya Sewa Griha. All rights reserved.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="site.js"></script>
+  <script>
+    // Benign "ResizeObserver loop…" notice from the preview harness — suppress.
+    (function () {
+      var isRO = function (m) { return typeof m === 'string' && m.indexOf('ResizeObserver loop') !== -1; };
+      window.addEventListener('error', function (e) { if (e && isRO(e.message)) { e.stopImmediatePropagation(); e.preventDefault(); } }, true);
+      var _e = console.error; console.error = function () { if (arguments.length && isRO(String(arguments[0]))) return; return _e.apply(console, arguments); };
+    })();
+
+    // Scroll storytelling: as the page scrolls away, the hands + text gently
+    // lift, soften and fade. Keyed to page scroll (not extra shell height) so
+    // the hero is exactly one screen tall and hands straight into the next
+    // section with no empty gap in between.
+    (function () {
+      var wrap = document.getElementById('fadewrap');
+      var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+      var smooth = function (t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); };
+      var ticking = false;
+      function render() {
+        ticking = false;
+        var vh = window.innerHeight;
+        // Fade complete a little before the hero fully leaves the screen.
+        var p = clamp((window.scrollY || window.pageYOffset || 0) / (vh * 0.78), 0, 1);
+        var hands = smooth(p);
+        wrap.style.opacity = (1 - hands).toFixed(3);
+        wrap.style.transform = 'translateY(' + (-hands * vh * 0.06).toFixed(1) + 'px) scale(' + (1 - hands * 0.03).toFixed(4) + ')';
+        wrap.style.filter = 'blur(' + (hands * 2.4).toFixed(2) + 'px)';
+      }
+      function onScroll() {
+        render(); // apply immediately (cheap; works even where rAF is throttled)
+        if (!ticking) { ticking = true; requestAnimationFrame(render); } // smooth follow-up
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      render();
+    })();
+
+    // Reveal the sticky header only after the one-screen hero has scrolled away,
+    // so it slides down from the top instead of sitting at the hero's bottom seam.
+    (function () {
+      var header = document.querySelector('.page-header--reveal');
+      var hero = document.querySelector('.hero-scroll');
+      if (!header || !hero) return;
+      var ticking = false;
+      function update() {
+        ticking = false;
+        var trigger = hero.offsetHeight - header.offsetHeight - 8;
+        header.classList.toggle('show', (window.scrollY || window.pageYOffset || 0) > trigger);
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+</body>
+</html>

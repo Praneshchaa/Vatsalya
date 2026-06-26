@@ -1,0 +1,70 @@
+/* ============================================================
+   Vatsalya Sewa Griha — Color Tokens
+   Primary: Forest Green  ·  Secondary: Warm Gold
+   "Where care meets joy" — warm, dignified, never clinical.
+   ============================================================ */
+
+:root {
+  /* ---- Primary · Forest Green ---------------------------- */
+  --color-primary-50:  #f0f8f1;  /* light backgrounds, tinted surfaces */
+  --color-primary-100: #dcefdf;  /* hover tints on light surfaces */
+  --color-primary-200: #b8debb;  /* borders, dividers, subtle accents */
+  --color-primary-300: #8ac791;  /* decorative, disabled-on-green */
+  --color-primary-400: #57a364;  /* secondary icon fills */
+  --color-primary-500: #2D7A3A;  /* buttons, links, icons, key UI */
+  --color-primary-600: #246731;  /* button hover */
+  --color-primary-700: #1f5a29;  /* hover states, dark accents */
+  --color-primary-900: #0f3015;  /* deep text on light green */
+
+  /* ---- Secondary · Warm Gold ----------------------------- */
+  --color-secondary-50:  #fdf6e3;  /* light highlights, warm tints */
+  --color-secondary-100: #faecc4;  /* warm hover tints */
+  --color-secondary-200: #f5d77a;  /* decorative accents, badges */
+  --color-secondary-300: #f0c450;  /* highlights */
+  --color-secondary-400: #ecb235;  /* hover on gold CTAs */
+  --color-secondary-500: #E8A020;  /* CTAs, highlights, featured */
+  --color-secondary-700: #a36b0a;  /* hover, text on light gold */
+  --color-secondary-900: #412402;  /* deep text on gold */
+
+  /* ---- Neutrals ------------------------------------------ */
+  --color-white:         #ffffff;
+  --color-surface:       #fafafa;  /* page surface, card backgrounds */
+  --color-background:    #f2f2f2;  /* page background, section fills */
+  --color-text-primary:  #1a1a1a;  /* headings, body text */
+  --color-text-muted:    #6b6b6b;  /* captions, labels, secondary */
+  --color-border:        #e5e5e5;  /* card borders, dividers */
+
+  /* ---- Semantic (derived from brand hues) ---------------- */
+  --color-success-50:  #f0f8f1;
+  --color-success-500: #2D7A3A;   /* shares the forest green */
+  --color-warning-50:  #fdf6e3;
+  --color-warning-500: #E8A020;   /* shares the warm gold */
+  --color-danger-50:   #fbecea;
+  --color-danger-500:  #c0492f;   /* warm terracotta, not clinical red */
+  --color-danger-700:  #97361f;
+
+  /* ---- Semantic aliases ---------------------------------- */
+  --text-heading:    var(--color-text-primary);
+  --text-body:       var(--color-text-primary);
+  --text-muted:      var(--color-text-muted);
+  --text-on-primary: var(--color-white);
+  --text-on-gold:    var(--color-secondary-900);
+  --text-link:       var(--color-primary-500);
+  --text-link-hover: var(--color-primary-700);
+
+  --surface-page:    var(--color-background);
+  --surface-card:    var(--color-white);
+  --surface-sunken:  var(--color-surface);
+  --surface-tint:    var(--color-primary-50);
+  --surface-gold:    var(--color-secondary-50);
+
+  --border-subtle:   var(--color-border);
+  --border-tint:     var(--color-primary-200);
+
+  --action-primary:        var(--color-primary-500);
+  --action-primary-hover:  var(--color-primary-600);
+  --action-primary-active: var(--color-primary-700);
+  --action-gold:           var(--color-secondary-500);
+  --action-gold-hover:     var(--color-secondary-400);
+  --focus-ring:            var(--color-primary-300);
+}

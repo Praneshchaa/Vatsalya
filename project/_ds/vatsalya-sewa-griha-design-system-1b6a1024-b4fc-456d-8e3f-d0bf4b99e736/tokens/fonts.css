@@ -1,0 +1,11 @@
+/* ============================================================
+   Vatsalya Sewa Griha — Webfonts
+   Poppins (Latin) + Noto Sans Devanagari (Nepali)
+   Loaded from Google Fonts. Weights restricted to 400 & 500
+   per brand rule (never 600/700 — too heavy).
+   NOTE: Font files are served from Google's CDN rather than
+   bundled binaries. If you need self-hosted .woff2 files,
+   ask the brand team for them.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500&display=swap');

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vatsalya Sewa Griha · Where care meets joy</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500&family=Lora:ital,wght@0,500;0,600;1,500&display=swap">
+
+<link rel="stylesheet" href="styles.css">
+
+<link rel="preload" as="image" href="assets/hand-elder-clean.png">
+<link rel="preload" as="image" href="assets/hand-young-clean.png">
+</head>
+<body>
+  <div class="hero-scroll">
+    <main class="stage" data-screen-label="Home hero">
+      <div class="bg"></div>
+
+      <div class="fadewrap" id="fadewrap">
+        <!-- Hands: elder reaches from the left, younger from the right; fingertips meet at centre -->
+        <div class="hand elder"><img src="assets/hand-elder-clean.png" alt="An elder's hand reaching out" /></div>
+        <div class="hand young"><img src="assets/hand-young-clean.png" alt="A younger hand reaching back" /></div>
+
+        <!-- Warm glow at the point of contact -->
+        <div class="glow"></div>
+
+        <!-- Overlay text -->
+        <div class="hero-text">
+          <p class="eyebrow reveal r-1">Where care meets joy</p>
+          <h1 class="hero-title reveal r-2">Vatsalya Sewa Griha</h1>
+          <p class="hero-sub reveal r-3">A trusted daycare for seniors.</p>
+        </div>
+      </div>
+
+      <!-- Soft side fades so the sleeves dissolve into the page -->
+      <div class="edge-fade"></div>
+
+      <!-- Header -->
+      <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Vatsalya Sewa Griha — home">
+          <img src="assets/logo-horizontal.png" alt="Vatsalya Sewa Griha" />
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="index.html" class="active" aria-current="page">Home</a>
+          <a href="about.html">About us</a>
+          <a href="contact.html">Contact us</a>
+        </nav>
+        <a class="cta" href="contact.html">Visit us</a>
+        <button class="nav-toggle" aria-label="Open menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+        </button>
+      </header>
+
+      <!-- Organic cream waves — bottom fill matches the section below so the curve melts into it -->
+      <svg class="waves" viewBox="0 0 1440 210" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,140 C240,96 470,196 760,166 C1030,138 1230,92 1440,134 L1440,210 L0,210 Z" fill="#e9efdd" opacity="0.6" />
+        <path d="M0,170 C260,124 470,210 760,186 C1040,164 1230,116 1440,160 L1440,210 L0,210 Z" fill="#faf3e1" />
+      </svg>
+
+      <!-- Leaves, lower-left -->
+      <svg class="leaves" viewBox="0 0 230 200" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 200 C2 150 6 86 70 40 C92 96 86 158 44 200 Z" fill="var(--color-primary-500)" opacity="0.92" />
+        <path d="M70 40 C70 96 58 150 40 196" stroke="#1f5a29" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+        <path d="M96 200 C72 162 78 110 132 78 C150 124 144 174 110 200 Z" fill="var(--color-primary-400)" opacity="0.9" />
+        <path d="M132 78 C128 124 116 166 104 196" stroke="#1f5a29" stroke-width="1.8" stroke-linecap="round" opacity="0.45" />
+        <path d="M150 200 C136 172 142 134 184 116 C196 150 190 184 168 200 Z" fill="var(--color-primary-300)" opacity="0.85" />
+      </svg>
+    </main>
+  </div>
+
+  <!-- ============================================================
+       CONTENT BELOW THE HERO (the hero above is intentionally untouched)
+       ============================================================ -->
+  <div class="vsg">
+
+    <!-- WHO WE ARE -->
+    <section class="note-home" data-screen-label="Who we are">
+      <div class="note-text r from-left">
+        <h2 class="note-head">While you are at work, they are never on their own. <span class="gold">They have friends, warm food, and someone close by.</span></h2>
+        <p class="note-body">Vatsalya is a real home in Kumaripati, Lalitpur. Not a ward, not a waiting room. A house where aama and buwa wake to chai and the morning paper, and fall asleep knowing someone is near.</p>
+        <p class="note-sign">With care, <b>the Vatsalya family</b></p>
+        <div class="note-marks">
+          <div class="nm">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M12 17.2s-2.6-1.6-2.6-3.4a1.6 1.6 0 0 1 2.6-1.2 1.6 1.6 0 0 1 2.6 1.2c0 1.8-2.6 3.4-2.6 3.4Z"/></svg></span>
+            <span class="lbl">A real home</span>
+          </div>
+          <div class="nm">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.1"/><circle cx="17" cy="9" r="2.5"/><path d="M3.5 19c.6-3.1 2.9-4.9 5.5-4.9s4.9 1.8 5.5 4.9"/><path d="M15.6 19c.3-1.9 1.4-3.3 3-3.6"/></svg></span>
+            <span class="lbl">Family, not staff</span>
+          </div>
+          <div class="nm">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9.5s-1.7-1.7-3.1-1.1a1.7 1.7 0 0 0-.5 2.7l3.6 3.5 3.6-3.5a1.7 1.7 0 0 0-.5-2.7C13.7 7.8 12 9.5 12 9.5Z"/><path d="M4 13v3a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4v-3"/><path d="M4 13a2 2 0 0 1 2-2M20 13a2 2 0 0 0-2-2"/></svg></span>
+            <span class="lbl">Never alone</span>
+          </div>
+        </div>
+      </div>
+      <div class="note-photo r from-right">
+        <img src="assets/note-photo.png" alt="A caregiver in a purple Vatsalya Sewa Griha uniform resting a hand on an elder woman's shoulder by a sunlit window" />
+      </div>
+    
+      <!-- wavy section divider -->
+      <svg class="wave-sep" viewBox="0 0 1440 210" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path class="w-accent" d="M0,140 C240,96 470,196 760,166 C1030,138 1230,92 1440,134 L1440,210 L0,210 Z" fill="#e3ecd6"></path>
+        <path d="M0,170 C260,124 470,210 760,186 C1040,164 1230,116 1440,160 L1440,210 L0,210 Z" fill="var(--cream-2)"></path>
+      </svg>
+      <svg class="wave-leaves" viewBox="0 0 230 200" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path data-fill="d1" d="M30 200 C2 150 6 86 70 40 C92 96 86 158 44 200 Z" fill="var(--color-primary-500)" opacity="0.92"></path>
+        <path d="M70 40 C70 96 58 150 40 196" stroke="#1f5a29" stroke-width="2" stroke-linecap="round" opacity="0.4"></path>
+        <path data-fill="d2" d="M96 200 C72 162 78 110 132 78 C150 124 144 174 110 200 Z" fill="var(--color-primary-400)" opacity="0.9"></path>
+        <path d="M132 78 C128 124 116 166 104 196" stroke="#1f5a29" stroke-width="1.8" stroke-linecap="round" opacity="0.35"></path>
+        <path data-fill="d3" d="M150 200 C136 172 142 134 184 116 C196 150 190 184 168 200 Z" fill="var(--color-primary-300)" opacity="0.85"></path>
+      </svg>
+    </section>
+
+    <!-- A DAY HERE -->
+    <section class="day" data-screen-label="A day here">
+      <div class="wrap">
+        <div class="day-main">
+          <div class="head r">
+            <h2>What the days<br />actually feel like</h2>
+          </div>
+          <div class="day-stack" data-stagger="150">
+            <div class="moment r from-left">
+              <p class="time">Morning</p>
+              <h3>Chai, the paper, and company</h3>
+              <p class="np">बिहानको चिया</p>
+              <p>The day starts together. Hot tea, the morning news, and friends to share it with before anything else.</p>
+            </div>
+            <div class="moment r from-left d1">
+              <p class="time">Midday</p>
+              <h3>A warm plate, eaten together</h3>
+              <p class="np">दालभात, सँगै</p>
+              <p>Fresh, home-cooked Nepali food at a shared table. The kind of meal that tastes like someone made it just for you.</p>
+            </div>
+            <div class="moment r from-left d2">
+              <p class="time">Afternoon</p>
+              <h3>Songs, games, a little exercise</h3>
+              <p class="np">गीत र हाँसो</p>
+              <p>Gentle movement and a lot of laughter. Afternoons here are active and social, never long and empty.</p>
+            </div>
+            <div class="moment r from-left d3">
+              <p class="time">Through the night</p>
+              <h3>Looked after while they sleep</h3>
+              <p class="np">सुरक्षित रात</p>
+              <p>Health checks, gentle care and someone close by, all night. Safe in the dark hours too, so you can rest as well.</p>
+            </div>
+          </div>
+        </div>
+        <div class="aside r scale-in d1">
+          <img src="assets/art/together.png" alt="An illustration of two people sharing chai on a garden bench" />
+          <p class="note">“The best part of my day is the morning chai. We sit, we talk, we laugh. It does not feel like a long day anymore.”</p>
+        </div>
+      </div>
+    
+      <!-- wavy section divider -->
+      <svg class="wave-sep" viewBox="0 0 1440 210" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path class="w-accent" d="M0,140 C240,96 470,196 760,166 C1030,138 1230,92 1440,134 L1440,210 L0,210 Z" fill="#e3ecd6"></path>
+        <path d="M0,170 C260,124 470,210 760,186 C1040,164 1230,116 1440,160 L1440,210 L0,210 Z" fill="var(--cream-0)"></path>
+      </svg>
+      <svg class="wave-leaves" viewBox="0 0 230 200" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path data-fill="d1" d="M30 200 C2 150 6 86 70 40 C92 96 86 158 44 200 Z" fill="var(--color-primary-500)" opacity="0.92"></path>
+        <path d="M70 40 C70 96 58 150 40 196" stroke="#1f5a29" stroke-width="2" stroke-linecap="round" opacity="0.4"></path>
+        <path data-fill="d2" d="M96 200 C72 162 78 110 132 78 C150 124 144 174 110 200 Z" fill="var(--color-primary-400)" opacity="0.9"></path>
+        <path d="M132 78 C128 124 116 166 104 196" stroke="#1f5a29" stroke-width="1.8" stroke-linecap="round" opacity="0.35"></path>
+        <path data-fill="d3" d="M150 200 C136 172 142 134 184 116 C196 150 190 184 168 200 Z" fill="var(--color-primary-300)" opacity="0.85"></path>
+      </svg>
+    </section>
+
+    <!-- WHY FAMILIES TRUST US -->
+    <section class="trust" data-screen-label="Why families trust us">
+      <div class="wrap">
+        <div class="r from-left art">
+          <img src="assets/art/window.png" data-parallax="40" alt="An illustration of warm light through a window with a plant and a cup of chai" />
+          <div class="badge-float">Visit any day, unannounced</div>
+        </div>
+        <div class="r from-right d1">
+          <h2 class="h-sec serif">Choosing care is hard.<br />We try to make it kind.</h2>
+          <ol data-stagger="140">
+            <li class="r rise-lg"><span class="num">01</span><div><h3>Caring, trained staff</h3><p>Every caregiver is chosen for warmth first, then trained to look after your parents gently and safely.</p></div></li>
+            <li class="r rise-lg d1"><span class="num">02</span><div><h3>Care shaped around each person</h3><p>We learn their routine, their tastes, their health. Their days are built around them, not around a schedule.</p></div></li>
+            <li class="r rise-lg d2"><span class="num">03</span><div><h3>You are always in the loop</h3><p>We keep you updated, and you are welcome to call or visit any day. No fixed hours, no barriers.</p></div></li>
+            <li class="r rise-lg d3"><span class="num">04</span><div><h3>Honest, plain-spoken</h3><p>No jargon, no surprises. We tell you everything simply and truthfully, the way family should.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    
+      <!-- wavy section divider -->
+      <svg class="wave-sep" viewBox="0 0 1440 210" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path class="w-accent" d="M0,140 C240,96 470,196 760,166 C1030,138 1230,92 1440,134 L1440,210 L0,210 Z" fill="#2d7a3a"></path>
+        <path d="M0,170 C260,124 470,210 760,186 C1040,164 1230,116 1440,160 L1440,210 L0,210 Z" fill="#1d3823"></path>
+      </svg>
+      <svg class="wave-leaves" viewBox="0 0 230 200" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path data-fill="d1" d="M30 200 C2 150 6 86 70 40 C92 96 86 158 44 200 Z" fill="var(--color-primary-500)" opacity="0.92"></path>
+        <path d="M70 40 C70 96 58 150 40 196" stroke="#1f5a29" stroke-width="2" stroke-linecap="round" opacity="0.4"></path>
+        <path data-fill="d2" d="M96 200 C72 162 78 110 132 78 C150 124 144 174 110 200 Z" fill="var(--color-primary-400)" opacity="0.9"></path>
+        <path d="M132 78 C128 124 116 166 104 196" stroke="#1f5a29" stroke-width="1.8" stroke-linecap="round" opacity="0.35"></path>
+        <path data-fill="d3" d="M150 200 C136 172 142 134 184 116 C196 150 190 184 168 200 Z" fill="var(--color-primary-300)" opacity="0.85"></path>
+      </svg>
+    </section>
+
+    <!-- OUR VALUES (dark, immersive) -->
+    <section class="values-big" data-screen-label="Our values">
+      <svg class="leaf-water" width="320" height="320" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+      <div class="wrap">
+        <p class="intro r d1">Four words guide every small choice we make here. Hover over each to hear what it means to us.</p>
+        <div class="vwords" id="vwords" data-stagger="130">
+          <span class="vword on r from-left" data-desc="We care with empathy and patience, treating every member the way we would want our own parents to be treated.">Compassion<span class="np">करुणा</span></span>
+          <span class="vword r from-left d1" data-desc="Every member is heard and honoured. Their preferences, their stories and their independence all matter, every single day.">Respect<span class="np">सम्मान</span></span>
+          <span class="vword r from-left d2" data-desc="From meals to mornings, we protect the quiet dignity of growing older, gently and without fuss.">Dignity<span class="np">मर्यादा</span></span>
+          <span class="vword r from-left d3" data-desc="Members, families and staff form one warm circle. Nobody here is ever on their own.">Community<span class="np">समुदाय</span></span>
+        </div>
+        <p class="vdesc" id="vdesc">We care with empathy and patience, treating every member the way we would want our own parents to be treated.</p>
+      </div>
+    
+      <!-- wavy section divider -->
+      <svg class="wave-sep" viewBox="0 0 1440 210" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path class="w-accent" d="M0,140 C240,96 470,196 760,166 C1030,138 1230,92 1440,134 L1440,210 L0,210 Z" fill="rgba(255,255,255,0.10)"></path>
+        <path d="M0,170 C260,124 470,210 760,186 C1040,164 1230,116 1440,160 L1440,210 L0,210 Z" fill="var(--cream-1)"></path>
+      </svg>
+      <svg class="wave-leaves on-dark" viewBox="0 0 230 200" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path data-fill="d1" d="M30 200 C2 150 6 86 70 40 C92 96 86 158 44 200 Z" fill="var(--color-primary-500)" opacity="0.92"></path>
+        <path d="M70 40 C70 96 58 150 40 196" stroke="#1f5a29" stroke-width="2" stroke-linecap="round" opacity="0.4"></path>
+        <path data-fill="d2" d="M96 200 C72 162 78 110 132 78 C150 124 144 174 110 200 Z" fill="var(--color-primary-400)" opacity="0.9"></path>
+        <path d="M132 78 C128 124 116 166 104 196" stroke="#1f5a29" stroke-width="1.8" stroke-linecap="round" opacity="0.35"></path>
+        <path data-fill="d3" d="M150 200 C136 172 142 134 184 116 C196 150 190 184 168 200 Z" fill="var(--color-primary-300)" opacity="0.85"></path>
+      </svg>
+    </section>
+
+    <!-- IN FAMILIES' WORDS -->
+    <section class="voices" data-screen-label="In families' words">
+      <div class="wrap">
+        <div class="head r">
+          <h2>The families who trust<br />us, say it best</h2>
+        </div>
+        <div class="voices-grid">
+          <figure class="big r scale-in">
+            <span class="mark">“</span>
+            <div class="stars"><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg></div>
+            <blockquote>My father has never been happier. The staff treat him like family, and he has made so many new friends.</blockquote>
+            <figcaption><span class="ava">A</span><span><span class="who">Anjali S.</span><br><span class="role">Daughter of a member</span></span></figcaption>
+          </figure>
+          <div class="col">
+            <figure class="small r from-right d1">
+              <div class="stars"><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg></div>
+              <blockquote>“Knowing my father is safe and surrounded by loving people gives our family real peace of mind.”</blockquote>
+              <figcaption><span class="ava">K</span><span><span class="who">Mr. Karki</span><br><span class="role">Family member</span></span></figcaption>
+            </figure>
+            <figure class="small r from-right d2">
+              <div class="stars"><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg><svg class="ico" viewBox="0 0 24 24"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7 14 2 9.2l6.9-.9L12 2Z"/></svg></div>
+              <blockquote>“It feels like home here. Laughter, good food, and people who truly care.”</blockquote>
+              <figcaption><span class="ava">S</span><span><span class="who">Saraswati D.</span><br><span class="role">Family of a member</span></span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    
+      <!-- wavy section divider -->
+      <svg class="wave-sep" viewBox="0 0 1440 210" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path class="w-accent" d="M0,140 C240,96 470,196 760,166 C1030,138 1230,92 1440,134 L1440,210 L0,210 Z" fill="#1f5a29"></path>
+        <path d="M0,170 C260,124 470,210 760,186 C1040,164 1230,116 1440,160 L1440,210 L0,210 Z" fill="var(--color-primary-600)"></path>
+      </svg>
+      <svg class="wave-leaves" viewBox="0 0 230 200" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path data-fill="d1" d="M30 200 C2 150 6 86 70 40 C92 96 86 158 44 200 Z" fill="var(--color-primary-500)" opacity="0.92"></path>
+        <path d="M70 40 C70 96 58 150 40 196" stroke="#1f5a29" stroke-width="2" stroke-linecap="round" opacity="0.4"></path>
+        <path data-fill="d2" d="M96 200 C72 162 78 110 132 78 C150 124 144 174 110 200 Z" fill="var(--color-primary-400)" opacity="0.9"></path>
+        <path d="M132 78 C128 124 116 166 104 196" stroke="#1f5a29" stroke-width="1.8" stroke-linecap="round" opacity="0.35"></path>
+        <path data-fill="d3" d="M150 200 C136 172 142 134 184 116 C196 150 190 184 168 200 Z" fill="var(--color-primary-300)" opacity="0.85"></path>
+      </svg>
+    </section>
+
+    <!-- MORE ABOUT US -->
+    <section class="band-green" data-screen-label="More about us">
+      <svg class="leaf-watermark" width="280" height="280" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+      <div class="inner">
+        <h2 class="h-sec serif">Want to know more about our home?</h2>
+        <p class="lead" style="color:var(--color-primary-100)">Read our story, our values and the family who would care for your parents. Or just call, and we'll tell you everything.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:30px">
+          <a class="btn btn-gold btn-lg" href="about.html">More about us<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-on-green btn-lg" href="tel:+97715410604"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg>Call 01-5410604</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" data-screen-label="Footer">
+      <div class="wrap">
+        <div class="footer-news">
+          <div class="news-col">
+            <img class="f-logo" src="assets/logo-white.png" alt="Vatsalya Sewa Griha" />
+            <h4 class="news-title">Subscribe for care tips &amp; updates</h4>
+            <p class="news-sub">Gentle, useful guidance for caring families.</p>
+            <form class="news-form">
+              <input type="text" placeholder="Your name" aria-label="Your name" required />
+              <input type="email" placeholder="Your email" aria-label="Your email" required />
+              <button type="submit">Subscribe</button>
+            </form>
+            <div class="social">
+              <a href="https://www.instagram.com/vatsalyasewagriha/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            </div>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About us</a></li>
+              <li><a href="contact.html">Contact us</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Care</h4>
+            <ul>
+              <li><a href="about.html">Personal care</a></li>
+              <li><a href="contact.html">Health &amp; safety</a></li>
+              <li><a href="about.html">Meals &amp; nutrition</a></li>
+              <li><a href="about.html">Activities &amp; company</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Reach us</h4>
+            <ul>
+              <li><a href="tel:+97715410604">01-5410604</a></li>
+              <li><a href="mailto:vatsalyasewagriha@gmail.com">vatsalyasewagriha@gmail.com</a></li>
+              <li><a href="contact.html">Kumaripati, Lalitpur</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© <span id="year">2026</span> Vatsalya Sewa Griha. All rights reserved.</span>
+          <span class="serif" style="color:var(--color-secondary-300); font-style:italic">Where care meets joy.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

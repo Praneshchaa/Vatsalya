@@ -1,0 +1,41 @@
+/* ============================================================
+   Vatsalya Sewa Griha — Typography Tokens
+   Poppins for everything; Noto Sans Devanagari for Nepali.
+   Two weights only: 400 (regular) & 500 (medium).
+   Sentence case always — never ALL CAPS or Title Case.
+   ============================================================ */
+
+:root {
+  /* ---- Families ------------------------------------------ */
+  --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-deva: 'Noto Sans Devanagari', 'Poppins', system-ui, sans-serif;
+
+  /* ---- Weights (only two) -------------------------------- */
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+
+  /* ---- Type scale ---------------------------------------- */
+  --font-size-h1:      32px;
+  --font-size-h2:      22px;
+  --font-size-h3:      16px;
+  --font-size-body:    15px;
+  --font-size-caption: 13px;
+
+  --line-height-h1:      1.2;
+  --line-height-h2:      1.3;
+  --line-height-h3:      1.4;
+  --line-height-body:    1.7;
+  --line-height-caption: 1.5;
+
+  /* ---- Semantic roles ------------------------------------ */
+  --text-h1-weight: var(--font-weight-medium);
+  --text-h2-weight: var(--font-weight-medium);
+  --text-h3-weight: var(--font-weight-medium);
+
+  /* ---- Reading measure ----------------------------------- */
+  --measure-body: 640px;  /* max line length for body copy */
+
+  /* ---- Letter spacing (kept neutral — Poppins is round) -- */
+  --tracking-normal: 0;
+  --tracking-tight: -0.01em;
+}
